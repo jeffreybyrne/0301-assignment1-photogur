@@ -1,8 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from photogur.models import Picture, Comment
+import ipdb
 
 def pictures_page(request):
-    context = {'name': 'Jeff'}
+    pictures = Picture.objects.all()
+    context = {'name': 'Jeff', 'pictures': pictures}
+    print(pictures)
+    # print(len(pictures[0].comments.all()))
     response = render(request, 'pictures.html', context)
     return HttpResponse(response)
