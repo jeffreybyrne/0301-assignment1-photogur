@@ -8,9 +8,13 @@
     <h1>Welcome to {{ name }}'s page of pictures!</h1>
     <ul>
       {% for picture in pictures %}
-      <p>{{ picture.title }} by {{ picture.artist }}</p>
-      <img src="{{ picture.url }}" alt="">
-      <p>Comments: {{ picture.comments.count }}</p>
+      <a href="{% url 'picture_details' id=picture.pk %}">
+        <li>
+          <p>{{ picture.title }} by {{ picture.artist }}</p>
+          <img src="{{ picture.url }}" alt="">
+          <p>Comments: {{ picture.comments.count }}</p>
+        </li>
+      </a>
       {% endfor %}
     </ul>
   </body>
