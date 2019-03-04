@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Welcome to {{ name }}'s page of pictures!</h2>
-    <ul>
+    <!-- <h2>Welcome to {{ name }}'s page of pictures!</h2> -->
+    <ul class='photo-list'>
       {% for picture in pictures %}
-      <a href="{% url 'picture_details' id=picture.pk %}">
-        <li>
-          <p>{{ picture.title }} by {{ picture.artist }}</p>
-          <img src="{{ picture.url }}" alt="">
-          <p>Comments: {{ picture.comments.count }}</p>
+        <li class='photo-item'>
+          <a href="{% url 'picture_details' id=picture.pk %}">
+            <img src="{{ picture.url }}" alt="" class="photo-image">
+          </a>
+          <p class='photo-title'>{{ picture.title }} by {{ picture.artist }}</p>
+          <p class='photo-comment-counter'>Comments: {{ picture.comments.count }}</p>
         </li>
-      </a>
       {% endfor %}
+    </ul>
 {% endblock %}
