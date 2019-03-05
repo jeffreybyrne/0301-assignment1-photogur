@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
   </head>
   <body>
-    <header>
-      <h1 class='main-header'>Photogur</h1>
+    <header class='main-header'>
+      <h1 class="main-header-text">Photogur</h1>
+      <form action="{% url 'picture_search' %}" method="get">
+        <label for="picture_search">
+          <span>Search:</span>
+          <input type="search" id="picture-search" name="query" value={{ query }} placeholder="Enter search term here">
+        </label>
+        <input type="submit" value="Search">
+      </form>
     </header>
     {% block content %}
     {% endblock %}

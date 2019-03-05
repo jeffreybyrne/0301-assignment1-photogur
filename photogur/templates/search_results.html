@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Search results: {{ pictures.count }}</h2>
+<ul class='photo-list'>
+  {% for picture in pictures %}
+    <li class='photo-item'>
+      <a href="{% url 'picture_details' id=picture.pk %}">
+        <img src="{{ picture.url }}" alt="" class="photo-image">
+      </a>
+      <p class='photo-title'>{{ picture.title }} by {{ picture.artist }}</p>
+      <p class='photo-comment-counter'>Comments: {{ picture.comments.count }}</p>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
