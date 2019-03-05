@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Search results: {{ pictures.count }}</h2>
-<ul class='photo-list'>
+<h2 class='results-header'>Search results: <span class='results-count'>{{ pictures.count }}</span></h2>
+<ul class='photo-search-list'>
   {% for picture in pictures %}
-    <li class='photo-item'>
+    <li class='results-photo-item'>
       <a href="{% url 'picture_details' id=picture.pk %}">
-        <img src="{{ picture.url }}" alt="" class="photo-image">
+        <img src="{{ picture.url }}" alt="" class="results-photo-image">
       </a>
-      <p class='photo-title'>{{ picture.title }} by {{ picture.artist }}</p>
-      <p class='photo-comment-counter'>Comments: {{ picture.comments.count }}</p>
+      <span class='results-text'>
+        <p><span class='results-photo-title'>{{ picture.title }}</span> by {{ picture.artist }}</p>
+      </span>
     </li>
   {% endfor %}
 </ul>
