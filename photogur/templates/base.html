@@ -13,7 +13,7 @@
       <form action="{% url 'picture_search' %}" method="get">
         <label for="picture_search">
           <span>Search:</span>
-          <input type="search" id="picture-search" name="query" value={{ query }} placeholder="Enter search term here">
+          <input type="search" id="picture-search" name="query" value="{{ query }}" placeholder="Enter search term here">
         </label>
         <input type="submit" value="Search">
       </form>
