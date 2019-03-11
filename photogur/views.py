@@ -90,8 +90,9 @@ def new_picture(request):
     if request.method == 'POST':
         form = PictureForm(request.POST)
         if form.is_valid():
-            form.user = request.user
             new_picture = form.save()
+            new_picture.user = request.user
+            new_picture.save()
             # ipdb.set_trace()
             return HttpResponseRedirect('/picture/' + str(new_picture.id))
     else:
