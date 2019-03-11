@@ -10,6 +10,12 @@
   <body>
     <header class='main-header'>
       <h1 class="main-header-text">Photogur</h1>
+
+      {% if request.user.is_authenticated %}
+      <p><a href="{% url 'logout' %}">Log Out</a></p>
+      {% else %}
+      <p><a href="{% url 'login' %}">Log In</a></p>
+      {% endif %}
       <form action="{% url 'picture_search' %}" method="get">
         <label for="picture_search">
           <span>Search:</span>
