@@ -9,10 +9,11 @@
   </head>
   <body>
     <header class='main-header'>
-      <h1 class="main-header-text">Photogur</h1>
+      <h1 class="main-header-text"><a href="{% url 'home' %}">Photogur</a></h1>
 
       {% if request.user.is_authenticated %}
       <p><a href="{% url 'logout' %}">Log Out</a></p>
+      <p><a href="{% url 'new_picture' %}">Add Picture</a></p>
       {% else %}
       <p><a href="{% url 'login' %}">Log In</a></p>
       {% endif %}
