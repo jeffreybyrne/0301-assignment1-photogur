@@ -19,7 +19,7 @@ from photogur.views import pictures_page, picture_show, picture_search, create_c
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pictures/', pictures_page),
+    path('pictures/', pictures_page, name='pictures'),
     path('picture/<int:id>', picture_show, name='picture_details'),
     path('search', picture_search, name='picture_search'),
     path('comments/new', create_comment, name='create_comment'),
