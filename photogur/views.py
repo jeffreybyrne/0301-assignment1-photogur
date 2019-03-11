@@ -3,6 +3,7 @@ from django.shortcuts import render
 from photogur.models import Picture, Comment
 from photogur.forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 # import ipdb
 # import pry
 
@@ -67,3 +68,25 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/pictures')
+
+
+# def signup(request):
+#     form = UserCreationForm()
+#     response = render(request, 'signup.html', {'form': form})
+#     return HttpResponse(response)
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_pw = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_pw)
+            login(request, user)
+            return HttpResponseRedirect('/pictures')
+    else:
+        form = UserCreationForm()
+    response = render(request, 'signup.html', {'form': form})
+    return HttpResponse(response)

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from photogur.views import pictures_page, picture_show, picture_search, create_comment, login_view, logout_view
+from photogur.views import pictures_page, picture_show, picture_search, create_comment, login_view, logout_view, signup
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('comments/new', create_comment, name='create_comment'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path('signup/', signup, name='signup'),
 ]
