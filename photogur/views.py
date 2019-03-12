@@ -4,15 +4,12 @@ from photogur.models import Picture, Comment
 from photogur.forms import LoginForm, PictureForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-import ipdb
-# import pry
+from django.contrib.auth.decorators import login_required
 
 
 def pictures_page(request):
     pictures = Picture.objects.all()
     context = {'name': 'Jeff', 'pictures': pictures}
-    # print(pictures)
-    # print(len(pictures[0].comments.all()))
     response = render(request, 'pictures.html', context)
     return HttpResponse(response)
 
@@ -27,9 +24,6 @@ def picture_show(request, id):
 def picture_search(request):
     query = request.GET['query']
     search_results = Picture.objects.filter(artist__contains=query) | Picture.objects.filter(title__contains=query) | Picture.objects.filter(url__contains=query)
-    # search_results = Picture.objects.filter(artist=query) | Picture.objects.filter(title=query) | Picture.objects.filter(url=query)
-    # ipdb.set_trace()
-    # pry()
     context = {'pictures': search_results, 'query': query}
     response = render(request, 'search_results.html', context)
     return HttpResponse(response)
@@ -86,6 +80,7 @@ def signup(request):
     return HttpResponse(response)
 
 
+@login_required
 def new_picture(request):
     if request.method == 'POST':
         form = PictureForm(request.POST)
@@ -93,7 +88,6 @@ def new_picture(request):
             new_picture = form.save()
             new_picture.user = request.user
             new_picture.save()
-            # ipdb.set_trace()
             return HttpResponseRedirect('/picture/' + str(new_picture.id))
     else:
         form = PictureForm()
